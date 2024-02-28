@@ -2,11 +2,15 @@ import express from "express";
 import { engine } from "express-handlebars";
 const app = express();
 
+import path from "path";
+import { fileURLToPath } from "url";
+const __dirname = fileURLToPath(new URL(".", import.meta.url));
+
 app.engine("handlebars", engine());
 app.set("view engine", "handlebars");
-app.set("views", "./dist/views");
+app.set("views", path.join(__dirname, "dist", "views"));
 
-app.use(express.static("dist"));
+app.use(express.static(path.join(__dirname, "dist")));
 
 // nav items begins
 const navItems = {
